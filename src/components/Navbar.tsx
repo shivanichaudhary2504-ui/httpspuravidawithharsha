@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import logo from "@/assets/logo.png";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -15,8 +16,8 @@ const Navbar = () => {
     <header className="fixed top-0 left-0 right-0 z-50 bg-beige/80 backdrop-blur-sm border-b border-border">
       <div className="flex items-center justify-between px-6 md:px-16 lg:px-24 h-16">
         {/* Logo */}
-        <Link to="/" className="display-serif-italic text-foreground text-lg tracking-tight">
-          PuraVida
+        <Link to="/">
+          <img src={logo} alt="PuraVida with Harsha" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop nav */}
