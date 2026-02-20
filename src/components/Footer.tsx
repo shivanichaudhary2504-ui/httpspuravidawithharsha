@@ -1,12 +1,13 @@
 import { Link } from "react-router-dom";
 import { Instagram, Mail, MessageCircle } from "lucide-react";
+import logo from "../assets/logo-white.png"
 
 const Footer = () => {
   return (
     <footer className="bg-foreground text-primary-foreground px-6 md:px-16 lg:px-24 py-16">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-12">
         <div>
-          <p className="display-serif-italic text-2xl text-primary-foreground mb-3">PuraVida</p>
+          <img src={logo} alt="puravida-logo" className="w-20 h-20" />
           <p className="body-sans text-sm opacity-60">with Harsha</p>
           <p className="body-sans text-sm opacity-50 mt-2">Dubai · UAE</p>
         </div>
