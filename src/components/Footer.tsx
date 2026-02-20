@@ -8,7 +8,6 @@ const Footer = () => {
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row justify-between gap-12">
         <div>
           <img src={logo} alt="puravida-logo" className="w-20 h-20" />
-          <p className="body-sans text-sm opacity-60">with Harsha</p>
           <p className="body-sans text-sm opacity-50 mt-2">Dubai · UAE</p>
         </div>
 
