@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Instagram, Mail, MessageCircle } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -24,10 +25,32 @@ const Footer = () => {
           ))}
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col gap-4">
           <p className="eyebrow opacity-50 mb-2">Connect</p>
-          <a href="https://wa.me/" className="nav-link opacity-60 hover:opacity-100 transition-opacity">WhatsApp</a>
-          <a href="mailto:hello@puravida.com" className="nav-link opacity-60 hover:opacity-100 transition-opacity">hello@puravida.com</a>
+
+          <a
+            href="https://wa.me/"
+            className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <MessageCircle size={16} strokeWidth={1.5} />
+            <span className="nav-link">WhatsApp</span>
+          </a>
+
+          <a
+            href="https://www.instagram.com/puravida.withharsha/"
+            className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <Instagram size={16} strokeWidth={1.5} />
+            <span className="nav-link">Instagram</span>
+          </a>
+
+          <a
+            href="mailto:hello@puravida.com"
+            className="flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity"
+          >
+            <Mail size={16} strokeWidth={1.5} />
+            <span className="nav-link">hello@puravida.com</span>
+          </a>
         </div>
       </div>
 

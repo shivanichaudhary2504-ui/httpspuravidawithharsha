@@ -1,159 +1,265 @@
 import { Link } from "react-router-dom";
+import { motion, Variants } from "framer-motion";
 import bhutanHero from "@/assets/bhutan-hero.jpg";
 import harshaFounder from "@/assets/harsha-founder.jpg";
+import flowerLine from "@/assets/flower-line.png";
+import { Phone, MessageCircle, Compass } from "lucide-react";
+import { ReactNode } from "react";
 
-const Index = () => {
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut" },
+  },
+};
+
+const stagger: Variants = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const softFadeUp: Variants = {
+  hidden: { opacity: 0, y: 25 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.9, ease: "easeOut" },
+  },
+};
+
+interface Step {
+  step: string;
+  label: string;
+  icon: ReactNode;
+}
+
+const steps: Step[] = [
+  { step: "01", label: "Feel the call", icon: <Compass size={26} strokeWidth={1.5} /> },
+  { step: "02", label: "We connect", icon: <MessageCircle size={26} strokeWidth={1.5} /> },
+  { step: "03", label: "The journey begins", icon: <Phone size={26} strokeWidth={1.5} /> },
+];
+
+const Index = (): JSX.Element => {
   return (
     <main>
+
       {/* HERO */}
-      <section className="relative min-h-screen flex items-end">
+      <section className="relative max-h-screen flex items-center">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${bhutanHero})` }}
         />
         <div className="absolute inset-0 bg-foreground/40" />
-        <div className="relative z-10 section-padding pb-28 max-w-4xl">
-          <p className="eyebrow text-primary-foreground/70 mb-8 animate-fade-up">PuraVida with Harsha</p>
-          <h1 className="display-serif text-5xl md:text-7xl lg:text-8xl text-primary-foreground mb-8 animate-fade-up" style={{ animationDelay: "0.1s" }}>
-            Travel not to escape,<br />but to return<br />
+
+        <motion.div
+          className="relative z-10 section-padding max-w-4xl"
+          initial="hidden"
+          animate="visible"
+          variants={stagger}
+        >
+          <motion.p variants={fadeUp} className="eyebrow text-primary-foreground/70 mb-8">
+            PuraVida with Harsha
+          </motion.p>
+
+          <motion.h1
+            variants={fadeUp}
+            className="display-serif text-5xl md:text-7xl lg:text-8xl text-primary-foreground mb-8 leading-tight"
+          >
+            Travel not to escape,<br />
+            but to return<br />
             <em>to yourself.</em>
-          </h1>
-          <p className="body-sans text-base text-primary-foreground/70 mb-12 max-w-md animate-fade-up" style={{ animationDelay: "0.2s" }}>
+          </motion.h1>
+
+          <motion.p
+            variants={fadeUp}
+            className="body-sans text-base text-primary-foreground/70 mb-12 max-w-md"
+          >
             Founder-led journeys into stillness, presence, and meaning.
-          </p>
-          <Link to="/begin-here" className="btn-ghost-light animate-fade-up" style={{ animationDelay: "0.3s" }}>
-            Begin Here
-          </Link>
-        </div>
+          </motion.p>
+
+          <motion.div variants={fadeUp}>
+            <Link to="/begin-here" className="btn-ghost-light">
+              Begin Here
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
 
-      {/* INTRO TEXT */}
-      <section className="section-padding bg-beige">
-        <div className="max-w-2xl mx-auto text-center">
-          <div className="divider-thin mx-auto mb-10" />
-          <p className="display-serif text-3xl md:text-4xl text-foreground leading-relaxed mb-6">
-            PuraVida with Harsha is a boutique transformational travel company based in Dubai.
-          </p>
-          <p className="body-sans text-foreground/60 text-base mb-4">
-            We curate intimate group journeys to destinations like Bhutan, Japan, Jordan, and Sri Lanka for professionals across the UAE and India.
-          </p>
-          <p className="display-serif-italic text-2xl text-foreground mt-8">
-            We are not a travel agency.<br />We are a soul-centered experience company.
-          </p>
-        </div>
-      </section>
 
-      {/* FEATURES — Why small groups matter */}
-      <section className="section-padding bg-sage">
-        <div className="max-w-5xl mx-auto">
-          <p className="eyebrow text-foreground/50 mb-16 text-center">Why small groups matter</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-1">
+      {/* WHY SMALL GROUPS */}
+      <section className="relative section-padding bg-sage overflow-hidden">
+
+        <div
+          className="absolute inset-0 bg-no-repeat bg-center opacity-[0.08] pointer-events-none"
+          style={{ backgroundImage: `url(${flowerLine})`, backgroundSize: "cover" }}
+        />
+
+        <motion.div
+          className="relative z-10 max-w-6xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
+        >
+          <motion.p
+            variants={fadeUp}
+            className="eyebrow text-foreground/50 mb-20 text-center font-bold tracking-[0.2em]"
+          >
+            WHY SMALL GROUPS MATTER
+          </motion.p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
               { number: "01", text: "Big groups rush." },
               { number: "02", text: "Small groups stay." },
               { number: "03", text: "That's the difference." },
             ].map((f) => (
-              <div key={f.number} className="bg-beige p-12 flex flex-col gap-6">
-                <span className="eyebrow text-accent">{f.number}</span>
-                <p className="display-serif text-2xl md:text-3xl text-foreground">{f.text}</p>
-              </div>
+              <motion.div
+                key={f.number}
+                variants={fadeUp}
+                className="bg-beige p-14 border border-sage/40 flex flex-col items-center text-center"
+              >
+                <span className="text-xs tracking-[0.3em] text-accent mb-8">
+                  {f.number}
+                </span>
+                <p className="display-serif text-2xl md:text-3xl text-foreground">
+                  {f.text}
+                </p>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* FOUNDER SPLIT */}
-      <section className="bg-beige">
-        <div className="grid grid-cols-1 md:grid-cols-2">
-          <div className="h-96 md:h-auto min-h-96 overflow-hidden">
-            <img
-              src={harshaFounder}
-              alt="Harsha, founder of PuraVida"
-              className="w-full h-full object-cover object-top"
-            />
+
+      {/* FOUNDER */}
+      <section className="relative min-h-screen bg-beige flex items-center overflow-hidden">
+
+        <div
+          className="absolute inset-0 bg-no-repeat bg-center opacity-[0.05] pointer-events-none"
+          style={{ backgroundImage: `url(${flowerLine})`, backgroundSize: "cover" }}
+        />
+
+        <motion.div
+          className="relative z-10 section-padding w-full max-w-6xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
+        >
+          <div className="flex flex-col md:flex-row gap-20 items-center">
+
+            <motion.div variants={fadeUp} className="w-full md:w-1/2">
+              <img
+                src={harshaFounder}
+                alt="Harsha"
+                className="w-full h-[500px] md:h-[650px] object-cover object-top"
+              />
+            </motion.div>
+
+            <motion.div variants={fadeUp} className="w-full md:w-1/2">
+              <p className="eyebrow text-accent mb-6">The Founder</p>
+
+              <h2 className="display-serif text-4xl md:text-6xl text-foreground mb-8 leading-tight">
+                Every journey is personally led by Harsha.
+              </h2>
+
+              <p className="body-sans text-foreground/60 mb-6">
+                Her voice. Her long-standing cultural relationships.
+                Her philosophy of stillness and presence.
+              </p>
+
+              <p className="display-serif-italic text-2xl text-foreground/80 mb-10">
+                Nothing is outsourced.<br />
+                Nothing is rushed.
+              </p>
+
+              <Link to="/about" className="btn-ghost-dark">
+                Meet Harsha
+              </Link>
+            </motion.div>
+
           </div>
-          <div className="section-padding flex flex-col justify-center">
-            <p className="eyebrow text-accent mb-6">The Founder</p>
-            <h2 className="display-serif text-4xl md:text-5xl text-foreground mb-8">
-              Every journey is personally led by Harsha.
-            </h2>
-            <p className="body-sans text-foreground/60 mb-4">
-              Her voice, her long-standing relationships with local cultural partners, and her philosophy of stillness and presence shape every experience.
-            </p>
-            <p className="display-serif-italic text-xl text-foreground/80 mb-10">
-              Nothing is outsourced. Nothing is rushed.
-            </p>
-            <Link to="/about" className="btn-ghost-dark self-start">
-              Meet Harsha
-            </Link>
-          </div>
-        </div>
+        </motion.div>
       </section>
 
-      {/* FEATURED JOURNEY */}
-      <section className="section-padding bg-foreground">
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-16 items-start">
-          <div className="flex-1">
-            <p className="eyebrow text-primary-foreground/40 mb-4">Featured Journey</p>
-            <h2 className="display-serif text-5xl md:text-6xl text-primary-foreground mb-3">Bhutan</h2>
-            <p className="display-serif-italic text-xl text-accent mb-8">The Kingdom of Stillness</p>
-            <p className="body-sans text-primary-foreground/60 max-w-md mb-12">
-              A founder-led journey for a small group of travellers ready to slow down, breathe, and reconnect with what matters.
-            </p>
-            <Link to="/journeys/bhutan" className="btn-ghost-light">
-              Explore this journey
-            </Link>
-          </div>
-          <div className="flex-1 flex items-center justify-end">
-            <p className="display-serif text-8xl md:text-9xl text-primary-foreground/10 select-none font-light">
-              April
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* PROCESS */}
+      {/* PROGRESS */}
       <section className="section-padding bg-sage">
-        <div className="max-w-4xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-            {[
-              { step: "01", label: "Feel the call" },
-              { step: "02", label: "We connect" },
-              { step: "03", label: "The journey begins" },
-            ].map((s, i) => (
-              <div key={s.step} className="flex flex-col gap-4">
-                <div className="flex items-center gap-4">
-                  <span className="eyebrow text-accent">{s.step}</span>
-                  {i < 2 && <div className="flex-1 h-px bg-accent/30 hidden md:block" />}
-                </div>
-                <p className="display-serif text-3xl text-foreground">{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+        <motion.div
+          className="max-w-5xl mx-auto text-center"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={stagger}
+        >
+          <motion.h2
+            variants={fadeUp}
+            className="display-serif text-4xl md:text-5xl text-foreground mb-6"
+          >
+            The Journey Begins
+          </motion.h2>
 
-      {/* POETIC TEXT */}
-      <section className="section-padding bg-beige text-center">
-        <div className="max-w-lg mx-auto">
-          <div className="divider-thin mx-auto mb-12" />
-          <p className="display-serif-italic text-3xl md:text-4xl text-foreground leading-relaxed">
-            The journey doesn't end when you return.<br />
-            <span className="text-foreground/50">It settles into how you live.</span>
-          </p>
-        </div>
+          <motion.p
+            variants={fadeUp}
+            className="body-sans text-foreground/60 max-w-xl mx-auto mb-20"
+          >
+            A quiet, intentional process. No pressure. No urgency.
+          </motion.p>
+
+          <motion.div
+            variants={fadeUp}
+            className="bg-beige border border-sage/40 rounded-xl py-16 px-8"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-14">
+              {steps.map((s) => (
+                <motion.div
+                  key={s.step}
+                  variants={fadeUp}
+                  className="flex flex-col items-center gap-6"
+                >
+                  <div className="text-accent">{s.icon}</div>
+                  <span className="text-xs tracking-[0.3em] text-foreground/40">
+                    {s.step}
+                  </span>
+                  <p className="display-serif text-2xl md:text-3xl text-foreground">
+                    {s.label}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       </section>
 
       {/* FINAL CTA */}
-      <section className="section-padding bg-sage text-center">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="display-serif text-4xl md:text-5xl text-foreground mb-10">
+      <section className="section-padding bg-beige text-center">
+        <motion.div
+          className="max-w-2xl mx-auto"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ staggerChildren: 0.2 }}
+        >
+          <motion.h2
+            variants={softFadeUp}
+            className="display-serif text-4xl md:text-5xl text-foreground mb-10"
+          >
             If something in you is saying yes, begin the conversation.
-          </h2>
-          <Link to="/begin-here" className="btn-ghost-dark">
-            Message Harsha
-          </Link>
-        </div>
+          </motion.h2>
+
+          <motion.div variants={softFadeUp}>
+            <Link to="/begin-here" className="btn-ghost-dark">
+              Message Harsha
+            </Link>
+          </motion.div>
+        </motion.div>
       </section>
     </main>
   );
